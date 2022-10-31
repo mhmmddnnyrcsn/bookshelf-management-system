@@ -11,6 +11,18 @@
 }
 
 /* ===== GLOBAL ===== */
+.red {
+  border: red solid;
+}
+
+.blue {
+  border: blue solid;
+}
+
+.green {
+  border: green solid;
+}
+
 html,
 body {
   margin: 0;
@@ -63,6 +75,10 @@ ul {
   display: flex;
 }
 
+.flex-direction-column {
+  flex-direction: column;
+}
+
 .space-between {
   justify-content: space-between;
 }
@@ -77,7 +93,7 @@ ul {
 
 /* ===== CLASSES ===== */
 /* ----- Header ----- */
-/* #header {
+#header {
   height: 5rem;
   padding: 0 2rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -89,7 +105,7 @@ ul {
 
 .nav__link:hover {
   border-bottom: .1rem solid black;
-} */
+}
 
 /* ----- Search ----- */
 /* ----- Add Book ----- */
@@ -126,5 +142,31 @@ ul {
 }
 
 /* ----- Reading Book ----- */
+.book-card {
+  padding: 1.5rem 2rem;
+}
+
+.book-author {
+  margin: 0;
+}
+
+.book-year {
+  margin: 0;
+  font-weight: bold;
+  color: grey;
+}
+
+.btn-book {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+}
+
+.btn-book__delete {
+  background-color: red;
+  color: white;
+  border: none;
+}
+
 /* ----- Finished Book ----- */
 /* ----- Footer ----- */
