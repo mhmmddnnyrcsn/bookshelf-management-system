@@ -169,4 +169,12 @@ ul {
 }
 
 /* ----- Finished Book ----- */
+
 /* ----- Footer ----- */
+#footer {
+  height: 5rem;
+  margin-top: 3rem;
+  background-color: var(--dark-brown);
+  font-size: 0.7rem;
+  color: #fff;
+}
