@@ -150,6 +150,19 @@ ul {
   font-size: 0.8rem;
 }
 
+.error-input {
+  border: red solid;
+}
+
+.error-text {
+  margin: 0;
+  color: red;
+}
+
+.error-display {
+  display: none;
+}
+
 /* ----- Reading Book ----- */
 .book-card {
   padding: 1.5rem 2rem;
