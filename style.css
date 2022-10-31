@@ -32,6 +32,16 @@ ul {
   margin-left: 2rem;
 }
 
+.container {
+  padding: 1rem 1rem;
+}
+
+.card {
+  padding: 1rem 1rem;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
 .btn {
   padding: 1rem 2rem;
   background-color: #FFFFFF;
@@ -57,13 +67,17 @@ ul {
   justify-content: space-between;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .align-items-center {
   align-items: center;
 }
 
 /* ===== CLASSES ===== */
 /* ----- Header ----- */
-#header {
+/* #header {
   height: 5rem;
   padding: 0 2rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -75,10 +89,42 @@ ul {
 
 .nav__link:hover {
   border-bottom: .1rem solid black;
-}
+} */
 
 /* ----- Search ----- */
 /* ----- Add Book ----- */
+.card-form {
+  width: 50%;
+}
+
+.form-title {
+  color: var(--dark-brown);
+}
+
+.from__field {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.form__text-input {
+  width: 100%;
+  height: 2.5rem;
+  border: none;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.form__text-input:focus {
+  outline: none !important;
+  border-color: var(--light-brown);
+  box-shadow: 0 0 10px var(--light-brown);
+}
+
+.btn-submit {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+}
+
 /* ----- Reading Book ----- */
 /* ----- Finished Book ----- */
 /* ----- Footer ----- */
