@@ -1,13 +1,82 @@
 /* ===== IMPORT ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
 /* ===== VARIABLES ===== */
+* {
+  --dark-brown: #594545;
+  --medium-brown: #815B5B;
+  --light-brown: #9E7676;
+  --cream: #FFF8EA;
+  box-sizing: border-box;
+}
 
 /* ===== GLOBAL ===== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+ul {
+  list-style: none;
+}
+
 /* ----- Elements ----- */
+.ml--2 {
+  margin-left: 2rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  background-color: #FFFFFF;
+  font-size: 1rem;
+  align-items: center;
+  border: 0.1rem solid var(--medium-brown);
+  border-radius: .5rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--dark-brown);
+  color: #fff;
+}
+
 /* ----- Behaviours ----- */
+.d-flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
 
 /* ===== CLASSES ===== */
 /* ----- Header ----- */
+#header {
+  height: 5rem;
+  padding: 0 2rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.company-logo {
+  height: 3rem;
+}
+
+.nav__link:hover {
+  border-bottom: .1rem solid black;
+}
+
 /* ----- Search ----- */
 /* ----- Add Book ----- */
 /* ----- Reading Book ----- */
