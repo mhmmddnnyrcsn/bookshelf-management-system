@@ -46,7 +46,7 @@ function showBooks(books = []) {
   finishedBooks.innerHTML = "";
 
   books.forEach(book => {
-    if (books.isCompleted == false) {
+    if (book.isFinished == false) {
       let ele = `
         <div class="card book-card d-flex space-between">
           <div class="book-detail">
@@ -55,7 +55,7 @@ function showBooks(books = []) {
             <p class="book-year">${book.year}</p>
           </div>
           <div class="book-btn-group d-flex flex-direction-column">
-            <button class="btn btn-book">Finished</button>
+            <button class="btn btn-book" onClick={toFinishedBook(${book.id})}>Finished</button>
             <button class="btn btn-book btn-book__delete">Delete</button>
           </div>
         </div>
@@ -70,7 +70,7 @@ function showBooks(books = []) {
             <p class="book-year">${book.year}</p>
           </div>
           <div class="book-btn-group d-flex flex-direction-column">
-            <button class="btn btn-book">Finished</button>
+            <button class="btn btn-book" onClick={toReadingBook(${book.id})}>Read Again</button>
             <button class="btn btn-book btn-book__delete">Delete</button>
           </div>
         </div>
@@ -123,8 +123,53 @@ addButton.addEventListener("click", (e) => {
     author.value = "";
     year.value = "";
     isFinished.checked = false;
+    location.reload();
   }
 })
+
+// Change Status Book to Finished Book
+function toFinishedBook(id) {
+  let confirmation = confirm("Have you finished reading the book?");
+
+  if (confirmation == true) {
+    const bookList = getBooks().filter(book => book.id == id);
+    const newBook = {
+      id: bookList[0].id,
+      title: bookList[0].title,
+      author: bookList[0].author,
+      year: bookList[0].year,
+      isFinished: !bookList[0].isFinished
+    }
+
+    const books = getBooks().filter(book => book.id != id)
+    localStorage.setItem(myLocalStorageKey, JSON.stringify(books))
+
+    addBook(newBook);
+    location.reload()
+  }
+}
+
+// Change Status Book to Reading Book
+function toReadingBook(id) {
+  let confirmation = confirm("do you want read this book again?")
+
+  if (confirmation == true) {
+    const bookList = getBooks().filter(book => book.id == id);
+    const newBook = {
+      id: bookList[0].id,
+      title: bookList[0].title,
+      author: bookList[0].author,
+      year: bookList[0].year,
+      isFinished: !bookList[0].isFinished
+    }
+
+    const books = getBooks().filter(book => book.id != id)
+    localStorage.setItem(myLocalStorageKey, JSON.stringify(books))
+
+    addBook(newBook);
+    location.reload()
+  }
+}
 
 // Check Web Storage when Load Page
 window.addEventListener("load", () => {
