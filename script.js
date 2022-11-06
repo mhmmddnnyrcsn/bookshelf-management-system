@@ -57,7 +57,7 @@ function showBooks(books = []) {
           <div class="book-btn-group d-flex flex-direction-column">
           <button class="btn btn-book" onClick={toFinishedBook(${book.id})}>Finished</button>
           <button class="btn btn-book btn-book__edit" onClick={updateData(${book.id})}>Edit</button>
-          <button class="btn btn-book btn-book__delete">Delete</button>
+          <button class="btn btn-book btn-book__delete" onClick={deleteBook(${book.id})}>Delete</button>
           </div>
         </div>
         `
@@ -73,7 +73,7 @@ function showBooks(books = []) {
           <div class="book-btn-group d-flex flex-direction-column">
             <button class="btn btn-book" onClick={toReadingBook(${book.id})}>Read Again</button>
             <button class="btn btn-book btn-book__edit" onClick={updateData(${book.id})}>Edit</button>
-            <button class="btn btn-book btn-book__delete">Delete</button>
+            <button class="btn btn-book btn-book__delete" onClick={deleteBook(${book.id})}>Delete</button>
           </div>
         </div>
         `
@@ -92,6 +92,16 @@ function updateData(id) {
 
   addButton.innerHTML = "Edit Book"
   addButton.value = book[0].id
+}
+
+// DELETE Data
+function deleteBook(id) {
+  const confirmation = confirm("You want delete this book?");
+  if (confirmation == true) {
+    const book = getBooks().filter(book => book.id != id)
+    localStorage.setItem(myLocalStorageKey, JSON.stringify(book));
+    location.reload();
+  }
 }
 
 // Form Add Data
