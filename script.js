@@ -13,8 +13,12 @@ const yearError = document.getElementById("year-error-display")
 
 const isFinished = document.getElementById("is-finished");
 
+// Search Data
+const searchByBookTitle = document.getElementById("search-by-book-title");
+
 // Button
 const addButton = document.getElementById("add-btn");
+const searchButton = document.getElementById("search-btn");
 
 // Global Variables
 let inputCheck = true;
@@ -168,6 +172,31 @@ addButton.addEventListener("click", (e) => {
     isFinished.checked = false;
     location.reload();
     alert("Book edited successfully!")
+  }
+})
+
+// Search Book by Title
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  const searchResult = document.querySelector(".search-result");
+
+  const theBook = getBooks().filter(book => book.title === searchByBookTitle.value.trim());
+  if (theBook == false) {
+    searchResult.innerHTML += `<p>Book not found<p>`;
+  } else {
+    console.log(theBook)
+    searchResult.innerHTML = ""
+    let ele = `
+      <div class="card book-card d-flex space-between">
+        <div class="book-detail">
+          <h3 class="book-title">${theBook[0].title}</h3>
+          <p class="book-author">${theBook[0].author}</p>
+          <p class="book-year">${theBook[0].year}</p>
+          <p class="book-status">${theBook[0].isFinished ? "Finished" : "On Progress"}</p>
+        </div>
+      </div>
+        `
+    searchResult.innerHTML += ele;
   }
 })
 
