@@ -55,8 +55,9 @@ function showBooks(books = []) {
             <p class="book-year">${book.year}</p>
           </div>
           <div class="book-btn-group d-flex flex-direction-column">
-            <button class="btn btn-book" onClick={toFinishedBook(${book.id})}>Finished</button>
-            <button class="btn btn-book btn-book__delete">Delete</button>
+          <button class="btn btn-book" onClick={toFinishedBook(${book.id})}>Finished</button>
+          <button class="btn btn-book btn-book__edit" onClick={updateData(${book.id})}>Edit</button>
+          <button class="btn btn-book btn-book__delete">Delete</button>
           </div>
         </div>
         `
@@ -71,6 +72,7 @@ function showBooks(books = []) {
           </div>
           <div class="book-btn-group d-flex flex-direction-column">
             <button class="btn btn-book" onClick={toReadingBook(${book.id})}>Read Again</button>
+            <button class="btn btn-book btn-book__edit" onClick={updateData(${book.id})}>Edit</button>
             <button class="btn btn-book btn-book__delete">Delete</button>
           </div>
         </div>
@@ -80,39 +82,70 @@ function showBooks(books = []) {
   })
 }
 
+// UPDATE Data
+function updateData(id) {
+  const book = getBooks().filter(book => book.id == id)
+  title.value = book[0].title
+  author.value = book[0].author
+  year.value = book[0].year
+  book[0].isFinished ? isFinished.checked = true : isFinished.checked = false
+
+  addButton.innerHTML = "Edit Book"
+  addButton.value = book[0].id
+}
+
 // Form Add Data
 addButton.addEventListener("click", (e) => {
   e.preventDefault();
 
-  title.classList.remove("error-input");
-  author.classList.remove("error-input");
-  year.classList.remove("error-input");
+  if (addButton.value == "") {
+    title.classList.remove("error-input");
+    author.classList.remove("error-input");
+    year.classList.remove("error-input");
 
-  titleError.classList.add("error-display");
-  authorError.classList.add("error-display");
-  yearError.classList.add("error-display");
+    titleError.classList.add("error-display");
+    authorError.classList.add("error-display");
+    yearError.classList.add("error-display");
 
-  if (title.value == "") {
-    title.classList.add("error-input");
-    titleError.classList.remove("error-display");
-    inputCheck = false;
-  }
-  if (author.value == "") {
-    author.classList.add("error-input");
-    authorError.classList.remove("error-display");
-    inputCheck = false;
-  }
-  if (year.value == "") {
-    year.classList.add("error-input");
-    yearError.classList.remove("error-display");
-    inputCheck = false;
+    if (title.value == "") {
+      title.classList.add("error-input");
+      titleError.classList.remove("error-display");
+      inputCheck = false;
+    }
+    if (author.value == "") {
+      author.classList.add("error-input");
+      authorError.classList.remove("error-display");
+      inputCheck = false;
+    }
+    if (year.value == "") {
+      year.classList.add("error-input");
+      yearError.classList.remove("error-display");
+      inputCheck = false;
+    } else {
+      inputCheck = true;
+    }
+
+    if (inputCheck === true) {
+      const newBook = {
+        id: +new Date(),
+        title: title.value.trim(),
+        author: author.value.trim(),
+        year: year.value.trim(),
+        isFinished: isFinished.checked
+      }
+      addBook(newBook);
+      title.value = "";
+      author.value = "";
+      year.value = "";
+      isFinished.checked = false;
+      location.reload();
+    }
   } else {
-    inputCheck = true;
-  }
+    const books = getBooks().filter(book => book.id != addButton.value)
+    localStorage.setItem(myLocalStorageKey, JSON.stringify(books))
 
-  if (inputCheck === true) {
     const newBook = {
-      id: +new Date(),
+      id: addButton.value,
       title: title.value.trim(),
       author: author.value.trim(),
       year: year.value.trim(),
@@ -124,6 +157,7 @@ addButton.addEventListener("click", (e) => {
     year.value = "";
     isFinished.checked = false;
     location.reload();
+    alert("Book edited successfully!")
   }
 })
 
@@ -173,5 +207,8 @@ function toReadingBook(id) {
 
 // Check Web Storage when Load Page
 window.addEventListener("load", () => {
-  showBooks(getBooks());
+  const statusDirectory = localStorage.getItem(myLocalStorageKey);
+  if (statusDirectory != null) {
+    showBooks(getBooks());
+  }
 })

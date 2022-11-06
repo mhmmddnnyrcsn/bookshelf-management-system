@@ -190,6 +190,12 @@ ul {
   border: none;
 }
 
+.btn-book__edit {
+  background-color: lightskyblue;
+  color: white;
+  border: none;
+}
+
 /* ----- Finished Book ----- */
 
 /* ----- Footer ----- */
