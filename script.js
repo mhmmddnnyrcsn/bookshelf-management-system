@@ -32,6 +32,54 @@ function addBook(book) {
   localStorage.setItem(myLocalStorageKey, JSON.stringify(bookList));
 }
 
+// READ Data from Web Storage
+function getBooks() {
+  return JSON.parse(localStorage.getItem(myLocalStorageKey));
+}
+
+// SHOW Data
+function showBooks(books = []) {
+  const readingBooks = document.querySelector(".reading-books");
+  const finishedBooks = document.querySelector(".finished-books");
+
+  readingBooks.innerHTML = "";
+  finishedBooks.innerHTML = "";
+
+  books.forEach(book => {
+    if (books.isCompleted == false) {
+      let ele = `
+        <div class="card book-card d-flex space-between">
+          <div class="book-detail">
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author">${book.author}</p>
+            <p class="book-year">${book.year}</p>
+          </div>
+          <div class="book-btn-group d-flex flex-direction-column">
+            <button class="btn btn-book">Finished</button>
+            <button class="btn btn-book btn-book__delete">Delete</button>
+          </div>
+        </div>
+        `
+      readingBooks.innerHTML += ele;
+    } else {
+      let ele = `
+        <div class="card book-card d-flex space-between">
+          <div class="book-detail">
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author">${book.author}</p>
+            <p class="book-year">${book.year}</p>
+          </div>
+          <div class="book-btn-group d-flex flex-direction-column">
+            <button class="btn btn-book">Finished</button>
+            <button class="btn btn-book btn-book__delete">Delete</button>
+          </div>
+        </div>
+        `
+      finishedBooks.innerHTML += ele;
+    }
+  })
+}
+
 // Form Add Data
 addButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -80,5 +128,5 @@ addButton.addEventListener("click", (e) => {
 
 // Check Web Storage when Load Page
 window.addEventListener("load", () => {
-  console.log(localStorage.getItem(myLocalStorageKey));
+  showBooks(getBooks());
 })
